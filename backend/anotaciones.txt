@@ -1,0 +1,31 @@
+¿Que es MVC?
+Model View Controller
+-Patron de arquitectura de software que permite la separación de obligaciones de cada
+parte del codigo.
+-Enfatiza la separación de la logica de programación con la presentación.
+-MVC es la arquitectura más común hoy en día y se usa en cualquier lenguaje.
+
+VENTAJAS
+-Las aplicaciones no tendrán mejor performance pero si tendrá mejor orden en el código.
+-Permite a los programadores saber exactamente donde encontrar el código .
+
+¿Qué es el Modelo?
+-Encargado de todo lo relacionado a los datos, base de datos y el CRUD.
+-El Modelo se encargará de consultar una base de datos pero no se encarga de mostrar esos datos.
+
+¿Qué es la Vista?
+-Se encarga de todo lo que se ve en la pantalla (HTML)
+-El Modelo se encargará de consultar la base de datos pero es la Vista la que se de mostrar
+los resultados.
+-En este caso la Vista estará hecha con React.
+
+¿Qué es el Controlador?
+-Es el que comunica el Modelo y la Vista, antes de que el Modelo consulte a la base de datos,
+el Controlador es el encargado de llamarlo, una vez que el Modelo ya consultó la base de datos,
+es el Controlador quien le comunica a la Vista los datos para que los muestre.
+
+¿Qué es el Router?
+-Encargado de registrar todas las URL's o Endpoints que soporta una aplicación.
+- Por ejemplo: Si el usuario accede a una URL el Router ya tiene las indicaciones de comunicarse
+con un Controlador en especifico, ese Controlador ya sabe que Modelo va a llamar y que vista va a ejecutar.
+
