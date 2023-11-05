@@ -253,7 +253,18 @@ const ProyectosProvider = ({ children }) => {
       const { data } = await clienteAxios.put(`/tareas/${tarea.id}`, tarea, config)
       // console.log(data);
       // TODO: Actualizar el DOM
-      
+      // tomar una copia del proyecto que esta en el state
+      const proyectoActualizado = {...proyecto}
+      // iterar y escribir sobre las tareas 
+      // tareaState = tarea temporal del state
+      // si tareastate es igual a data que es la respuesta de la api
+      //  o el registro actualizado de la base de datos
+      // si es asi reescribe el tarea state con data en caso contrario retorna con tareaState
+      proyectoActualizado.tareas = proyectoActualizado.tareas.map( tareaState =>
+      tareaState._id === data._id ? data : tareaState )
+
+      setProyecto(proyectoActualizado)
+
       // Limpiar en caso de alertas
       setAlerta({})
       // Ocultar formulario
