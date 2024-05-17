@@ -36,7 +36,7 @@ const FormularioProyecto = () => {
     if ([nombre, descripcion, fechaEntrega, cliente].includes('')){
         mostrarAlerta({
             msg:'Todos los campos son obligatorios',
-            error: true
+            error: true,
         })
         // return para que no ejecute las siguientes lineas
         return
@@ -125,10 +125,10 @@ const FormularioProyecto = () => {
         />
       </div>
       <input 
-      type="submit" 
-      // condicional actualizar o crear
-      value={id ? 'Actualizar Proyecto': 'Crear Proyecto'}
-      className="bg-sky-600 w-full p-3 uppercase font-bold text-white rounded cursor-pointer hover:bg-sky-700 transition-colors"
+        type="submit" 
+        // condicional actualizar o crear --> boton cambia depende si es crear o actualiza proyecto
+        value={id ? 'Actualizar Proyecto': 'Crear Proyecto'}
+        className="bg-sky-600 w-full p-3 uppercase font-bold text-white rounded cursor-pointer hover:bg-sky-700 transition-colors"
       />
     </form>
   );

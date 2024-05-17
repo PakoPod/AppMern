@@ -17,7 +17,9 @@ router
     .get(checkAuth, obtenerTarea)
     .put(checkAuth, actualizarTarea)
     .delete(checkAuth, eliminarTarea);
+
 // cambiarEstado se debe comprobar que el usuario sea colaborador del proyecto
-router.post("/estado/:id", checkAuth, cambiarEstado)
+router
+    .post("/estado/:id", checkAuth, cambiarEstado)
 
 export default router;

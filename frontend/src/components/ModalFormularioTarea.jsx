@@ -17,45 +17,47 @@ const ModalFormularioTarea = () => {
   const [prioridad, setPrioridad] = useState("");
 
   const params = useParams();
-//   console.log(params);
+  //   console.log(params);
 
   const {
     modalFormularioTarea,
     handleModalTarea,
     mostrarAlerta,
     alerta,
-    submitTarea, tarea
+    submitTarea,
+    tarea,
   } = useProyectos();
 
   // Utilizar el useEffect
-  useEffect (() => {
-    // Esto es para no tener problemas con tareas existentes a una nueva 
-    if (tarea?._id) {
-    // Lllenar campos del formulario modal
-      setId(tarea._id)
-      setNombre(tarea.nombre)
-      setDescripcion(tarea.descripcion)
-      setFechaInicio(tarea.fechaInicio?.split('T')[0])
-      setFechaEntrega(tarea.fechaEntrega?.split('T')[0])
-      setResponsable(tarea.responsable)
-      setPrioridad(tarea.prioridad)
-      return
-    }
-    setId('')
-    setNombre('')
-    setDescripcion('')
-    setFechaInicio('')
-    setFechaEntrega('')
-    setResponsable('')
-    setPrioridad('')
-    // console.log(tarea);
-  },
-  // utilizar solo una vez se pasa como dependencia la tarea
-   [tarea]);
+  useEffect(
+    () => {
+      // Esto es para no tener problemas con tareas existentes a una nueva
+      if (tarea?._id) {
+        // Lllenar campos del formulario modal
+        setId(tarea._id);
+        setNombre(tarea.nombre);
+        setDescripcion(tarea.descripcion);
+        setFechaInicio(tarea.fechaInicio?.split("T")[0]);
+        setFechaEntrega(tarea.fechaEntrega?.split("T")[0]);
+        setResponsable(tarea.responsable);
+        setPrioridad(tarea.prioridad);
+        return;
+      }
+      setId("");
+      setNombre("");
+      setDescripcion("");
+      setFechaInicio("");
+      setFechaEntrega("");
+      setResponsable("");
+      setPrioridad("");
+      // console.log(tarea);
+    },
+    // utilizar solo una vez se pasa como dependencia la tarea
+    [tarea]
+  );
 
-  const handleSubmit = async e => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
     if (
       [
         nombre,
@@ -72,7 +74,6 @@ const ModalFormularioTarea = () => {
       });
       return;
     }
-
     await submitTarea({
       id,
       nombre,
@@ -81,15 +82,15 @@ const ModalFormularioTarea = () => {
       fechaEntrega,
       responsable,
       prioridad,
-      proyecto: params.id
+      proyecto: params.id,
     });
-    setId('')
-    setNombre('')
-    setDescripcion('')
-    setFechaInicio('')
-    setFechaEntrega('')
-    setResponsable('')
-    setPrioridad('')
+    setId("");
+    setNombre("");
+    setDescripcion("");
+    setFechaInicio("");
+    setFechaEntrega("");
+    setResponsable("");
+    setPrioridad("");
   };
 
   const { msg } = alerta;
@@ -115,7 +116,6 @@ const ModalFormularioTarea = () => {
             <Dialog.Overlay className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
           </Transition.Child>
 
-          {/* This element is to trick the browser into centering the modal contents. */}
           <span
             className="hidden sm:inline-block sm:align-middle sm:h-screen"
             aria-hidden="true"
@@ -162,7 +162,7 @@ const ModalFormularioTarea = () => {
                     className=" text-3xl leading-6 font-bold text-white"
                   >
                     {/* Condicional editar o crear una ueva tarea si hay un id */}
-                    {id ? 'Editar Tarea' : 'Crear Tarea'}
+                    {id ? "Editar Tarea" : "Crear Tarea"}
                   </Dialog.Title>
 
                   {msg && <Alerta alerta={alerta} />}
@@ -232,11 +232,12 @@ const ModalFormularioTarea = () => {
                     <div className="mb-5">
                       <label
                         className="text-white uppercase font-bold text-sm"
-                        htmlFor="descripcion"
+                        htmlFor="responsable"
                       >
                         Responsable
                       </label>
                       <input
+                        type="text"
                         id="responsable"
                         placeholder="Nombre del responsable de la tarea"
                         className="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
@@ -268,8 +269,8 @@ const ModalFormularioTarea = () => {
                       type="submit"
                       className="bg-sky-600 hover:bg-sky-700 w-full p-3
                      text-white font-bold uppercase cursor-pointer transition-colors rounded"
-                    //  Condicional del boton al crear una tarea o guardar cambios editados
-                      value = { id ? 'Guardar Cambios' : 'Crear Tarea' }
+                      //  Condicional del boton al crear una tarea o guardar cambios editados
+                      value={id ? "Guardar Cambios" : "Crear Tarea"}
                     />
                   </form>
                 </div>

@@ -37,7 +37,6 @@ const AuthProvider = ({ children }) => {
       };
       // Esto va a la ruta y le pasa el token lo revisa y valida
       // Si todo esta bien lo asigna a req.usuario del archivo checkAuth.js
-
       try {
         const { data } = await clienteAxios("/usuarios/perfil", config);
         // La respuesta se pone en setAuth
@@ -49,21 +48,23 @@ const AuthProvider = ({ children }) => {
         setAuth({})
       }
       setCargando(false);
-
     }
     autenticarUsuario();
   }, []);
 
+  const cerrarSesionAuth = () => {
+    setAuth({})
+  }
   return (
     <AuthContext.Provider
       // aqui retornamos un objeto
       value={{
         auth,
         setAuth,
-        cargando
+        cargando,
+        cerrarSesionAuth
       }}
     >
-      {/* componentes de la app children */}
       {children}
     </AuthContext.Provider>
   );
@@ -71,4 +72,3 @@ const AuthProvider = ({ children }) => {
 
 export { AuthProvider };
 export default AuthContext;
-// Uso de contextAPI

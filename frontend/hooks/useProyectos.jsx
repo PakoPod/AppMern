@@ -3,7 +3,7 @@ import { useContext } from "react";
 import ProyectosContext from "../src/context/ProyectosProvider";
 
 const useProyectos = () => {
-    // Retorna usecontext que permite acceder a las funciones 
+    // Retorna useContext que permite acceder a las funciones 
     return useContext(ProyectosContext)
 }
 

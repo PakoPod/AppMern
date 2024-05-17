@@ -24,7 +24,6 @@ router.post('/olvide-password', olvidePassword);
 // router.get('/olvide-password/:token', comprobarToken);
 // router.post('/olvide-password/:token', nuevoPassword);
 router.route('/olvide-password/:token').get(comprobarToken).post(nuevoPassword);
-
 // End point para pasarle el JSON WEb token y va a retornar el perfil del usuario
 // CheckAuth es para comprobar el json web token que no este expirado etc
 // Tambien checa que sea valido, exista y sea enviado 

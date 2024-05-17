@@ -7,11 +7,8 @@ import Sidebar from "../components/Sidebar";
 const RutaProtegida = () => {
   // extraer lo que hay en el value -> auth y llamar la funcion
   const { auth, cargando } = useAuth();
-
   if (cargando) return 'Cargando...'
-
-//   console.log(auth);
-
+  //   console.log(auth);
   return (
     <>
       {/* Comprobacion si auth._id existe el usuario esta autenticado sino mandalo a iniciar sesion */}
@@ -32,5 +29,4 @@ const RutaProtegida = () => {
     </>
   );
 };
-
 export default RutaProtegida;

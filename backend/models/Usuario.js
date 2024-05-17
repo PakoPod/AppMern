@@ -48,9 +48,7 @@ usuarioSchema.methods.comprobarPassword = async function(passwordFormulario) {
     return await bcrypt.compare(passwordFormulario, this.password);
     // La funcion compare compara un string hasheado con uno que no
 }
-
 // MongoDB es del estilo no relacional como Mysql pero se puede hacer
-
 const Usuario = mongoose.model("Usuario", usuarioSchema);   // Usuario con su Schema
 
 export default Usuario; // Con esto la hacemos disponible en la aplicación.
