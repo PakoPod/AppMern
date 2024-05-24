@@ -29,6 +29,8 @@ dotenv.config();
 
 conectarDB();
 
+// Configurar Mongoose
+mongoose.set('strictQuery', true);
 // Configurar CORS
 // Dominios permitidos
 // Se cambia a una variable de entorno
