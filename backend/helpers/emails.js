@@ -1,5 +1,5 @@
 // 4 correos uno para confirmar / recuperar contraseña / añadido al proyecto / eliminado del proyecto
-import nodemailer from "nodemailer";
+// import nodemailer from "nodemailer";
 import dotenv from 'dotenv';
 
 // Configurar dotenv para cargar las variables de entorno
