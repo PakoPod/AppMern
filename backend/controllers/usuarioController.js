@@ -41,6 +41,7 @@ const registrar = async (req, res) => {
         // console.log(usuario);
     } catch (error) {
         console.log(error);
+        res.status(500).json({ msg: "Hubo un error al registrar el usuario" });
     }
 };
 
@@ -115,8 +116,6 @@ const olvidePassword = async (req, res) => {
         usuario.token = generarTokenConfirmacion()
         // Guardar en la base de datos
         await usuario.save();
-        
-
         //Enviar el email
         emailOlvidePassword({
             email: usuario.email,
@@ -128,6 +127,7 @@ const olvidePassword = async (req, res) => {
         console.log(usuario);
     } catch (error) {
         console.log(error);
+        res.status(500).json({ msg: "Hubo un error al enviar el email" });
     }
 }
 
@@ -161,6 +161,7 @@ const nuevoPassword = async (req, res) => {
             res.json({ msg: "Password Modificado Correctamente" });
         } catch (error) {
             console.log(error)
+            res.status(500).json({ msg: "Hubo un error al guardar el nuevo password" });
         }
 
 
@@ -176,15 +177,12 @@ const nuevoPassword = async (req, res) => {
 // Aqui se obtienen los datos del request del servidor
 const perfil = async (req, res) => {
     // console.log('desde perfil...')
-
     const { usuario } = req;
-
     res.json(usuario);
 }
 // const usuarios = (req, res) => { //get es visitar una url
 //     res.json( { msg: "Desde API/USUARIOS" });
 // }
-
 // const crearUsuario = (req, res) => {
 //     res.json( { msg: "Creando Usuario"});
 // };
@@ -198,6 +196,5 @@ export {
     nuevoPassword,
     perfil
 };
-
 // FRONTEND - NETTLIFY
 // BACKEND - EROKO Y DIGITAL OCEAN

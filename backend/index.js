@@ -13,7 +13,8 @@ import conectarDB from "./config/db.js";
 import usuarioRoutes from "./routes/usuarioRoutes.js";
 import proyectoRoutes from "./routes/proyectoRoutes.js";
 import tareaRoutes from "./routes/tareaRoutes.js";
-
+import mongoose from 'mongoose';
+import { Server } from 'socket.io';
 // El middleware ejecutara estas lineas una a una
 const app = express();
 // const cors = require('cors');
@@ -35,7 +36,7 @@ conectarDB();
 // Regla en la que se asignan las variables de entorno en NodeJS usando process.env
 
 // const whitelist = ['http://localhost:5173'];
-const whitelist = [process.env.FRONTEND_URL, 'http://localhost:5173'];
+const whitelist = [process.env.FRONTEND_URL, 'http://localhost:5173', 'http://127.0.0.1:5173'];
 
 // const whitelist = [process.env.FRONTEND_URL || 'http://localhost:5173'];
 

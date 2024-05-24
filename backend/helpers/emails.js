@@ -1,58 +1,58 @@
 // 4 correos uno para confirmar / recuperar contraseña / añadido al proyecto / eliminado del proyecto
 import nodemailer from "nodemailer";
+import dotenv from 'dotenv';
+
+// Configurar dotenv para cargar las variables de entorno
+dotenv.config();
+
+// Configurar SendGrid
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 export const emailRegistro = async (datos) => {
   // console.log("Datos usuario:", datos);
   const { email, nombre, token } = datos;
 
-  const transport = nodemailer.createTransport({
-    host: process.env.EMAIL_HOST,
-    port: process.env.EMAIL_PORT,
-    auth: {
-      user: process.env.EMAIL_USER,
-      pass: process.env.EMAIL_PASS,
-    },
-  });
-  // Esto es para configurar el cliente para  enviar el email y
-  // despues se tiene acceso a la variable
-  // y el metodo que existe
-  const info = await transport.sendMail({
-    from: '"Administrador de proyectos" <cuentas@uptask.com>',
+  const msg = {
     to: email,
-    subject: "Administrador de proyectos - Confirma tu cuenta",
-    text: "Comprueba tu cuenta en Administrador de proyectos",
-    html: `<p> Hola: ${nombre} Comprueba tu cuenta ahora</p>
-        <p> Tu cuenta esta ya casi lista, debes solo comprobarla con el siguiente enlace:
-        <a href="${process.env.FRONTEND_URL}/confirmar/${token}">Comprobar Cuenta</a>
-        <p> Si tu no creaste la cuenta, puedes ignorar el mensaje </p>
-        `,
-  });
+    from: 'francisco.ortega@cua.uam.mx', // Dirección verificada en SendGrid
+    subject: 'Administrador de proyectos - Confirma tu cuenta',
+    text: 'Comprueba tu cuenta en Administrador de proyectos',
+    html: `<p>Hola: ${nombre} Comprueba tu cuenta ahora</p>
+           <p>Tu cuenta está ya casi lista, solo debes comprobarla con el siguiente enlace:
+           <a href="${process.env.FRONTEND_URL}/confirmar/${token}">Comprobar Cuenta</a></p>
+           <p>Si tú no creaste la cuenta, puedes ignorar este mensaje.</p>`,
+  };
+  try {
+    await sgMail.send(msg);
+    console.log('Mensaje enviado');
+  } catch (error) {
+    console.error('Error al enviar el email:', error);
+    if (error.response) {
+      console.error(error.response.body);
+    }
+  }
 };
-
 export const emailOlvidePassword = async (datos) => {
   const { email, nombre, token } = datos;
 
-  const transport = nodemailer.createTransport({
-    host: process.env.EMAIL_HOST,
-    port: process.env.EMAIL_PORT,
-    auth: {
-      user: process.env.EMAIL_USER,
-      pass: process.env.EMAIL_PASS,
-    },
-  });
-  // Esto es para configurar el cliente para  enviar el email y
-  // despues se tiene acceso a la variable
-  // y el metodo que existe
-  const info = await transport.sendMail({
-    from: '"Administrador de proyectos" <cuentas@uptask.com>',
+  const msg = {
     to: email,
-    subject: "Administrador de proyectos - Reestablece tu Password",
-    text: "Comprueba tu cuenta en Administrador de proyectos",
-    html: `<p> Hola: ${nombre} has solicitado reestablecer tu password</p>
-        <p> Sigue el siguiente enlace para generar un nuevo password:
+    from: 'francisco.ortega@cua.uam.mx', // Dirección verificada en SendGrid
+    subject: 'Administrador de proyectos - Restablece tu contraseña',
+    text: 'Restablece tu contraseña en Administrador de proyectos',
+    html: `<p>Hola: ${nombre}, has solicitado restablecer tu contraseña</p>
+           <p>Sigue el siguiente enlace para generar una nueva contraseña:
+           <a href="${process.env.FRONTEND_URL}/olvide-password/${token}">Restablecer Contraseña</a></p>
+           <p>Si tú no solicitaste este email, puedes ignorar este mensaje.</p>`,
+  };
 
-        <a href="${process.env.FRONTEND_URL}/olvide-password/${token}">Reestablecer Password</a>
-        <p> Si tu no solicitaste este email, puedes ignorar el mensaje </p>
-        `,
-  });
+  try {
+    await sgMail.send(msg);
+    console.log('Mensaje enviado');
+  } catch (error) {
+    console.error('Error al enviar el email:', error);
+    if (error.response) {
+      console.error(error.response.body);
+    }
+  }
 };
